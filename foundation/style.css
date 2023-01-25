@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,600;0,700;1,100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+.hero {
+    scroll-behavior: smooth;
+    background: #fff;
+    min-height: 175vh;
+    width: 100%;
+    color: #630bd1;
+    position: relative;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    padding: 20px 8%;
+}
+
+nav .logo {
+    width: 250px;
+    max-height: fit-content;
+    cursor: pointer;
+    z-index: 1;
+}
+
+nav ul {
+    flex: 1;
+    text-align: right;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 0 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #630bd1;
+}
+
+/* button {
+    background: #efefef;
+    height: 30px;
+    width: 60px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 500ms;
+}
+
+/* button span {
+    display: block;
+    background: #999;
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    margin-left: 2px;
+    transition: background 500ms, margin-left 500ms;
+}
+
+.lamp-container {
+    position: absolute;
+    top: -20px;
+    left: 22%;
+    width: 200px;
+}
+
+.lamp {
+    width: 100%;
+}
+
+.light {
+    position: absolute;
+    top: 97%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    margin-left: -10px;
+    opacity: 0;
+    transition: opacity 500ms;
+} */
+
+.text-container {
+    max-width: 1000px;
+    margin-top: 8%;
+    margin-left: 12%;
+}
+
+.text-container h1 {
+    font-size: 80px;
+    font-weight: 400;
+}
+
+.text-container p {
+    font-size: 20px;
+}
+
+.text-container a {
+    text-decoration: none;
+    background: #630bd1;
+    padding: 8px 30px;
+    display: inline-block;
+    color: #fff;
+    font-size: 18px;
+    margin-top: 30px;
+    margin-right: 18px;
+    border-radius: 30px;
+}
+
+.text-container a:hover {
+    background: #fed9ff;
+    transition: 300ms ease;
+}
+
+/* .control {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 150px;
+}
+
+.control .line {
+    width: 250px;
+    height: 4px;
+    background: #fff;
+    margin: 0 20px;
+    border-radius: 2px;
+}
+
+.control .line span {
+    width: 50%;
+    height: 8px;
+    margin-top: -2px;
+    border-radius: 4px;
+    background: #630bd1;
+    display: block;
+}
+
+.active {
+    background: #9441B1;
+}
+
+.active span {
+    background: #fff;
+    margin-left: 31px;
+}
+
+.on {
+    opacity: 1;
+} */
+
+.scoll-container {
+    margin-top: 8%;
+    margin-left: 12%;
+}
+
+.scoll-container h2 {
+    font-family: 'Source Code Pro', monospace;
+}
+
+.scroll {
+    background-color: #fed9ff;
+    width: 800px;
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: left;
+    padding: 20px;
+    margin-top: 1rem;
+}
+
+@media (max-width: 1045px) {
+
+    .text-container h1 {
+        font-size: 60px;
+        line-height: 1.25;
+    }
+
+    .text-container p {
+        margin-right: 10%;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .hero ul {
+        display: none;
+    }
+
+    /* .lamp-container {
+        display: none;
+    }
+
+    button {
+        display: none;
+    } */
+
+    .text-container p {
+        max-width: 400px;
+    }
+
+    .text-container a {
+        padding: 6px 20px;
+    }
+
+    .scoll-container {
+        padding-top: 6%;
+    }
+
+    .scroll {
+        width: 300px;
+        font-size: 10px;
+    }
+
+    .scoll-container h2 {
+        font-size: 20px;
+    }
+}

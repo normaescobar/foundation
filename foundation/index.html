@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Bitcoin Foundation</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hero">
+        <nav>
+            <img src="./images/secondary-logo.png" class="logo">
+            <ul>
+                <!-- <li><a href="">Donate</a></li> -->
+                <li><a href="https://normaescobar.com">Developer</a></li>
+                <li><a href="mailto:norma@normaescobar.com">Contact</a></li>
+            </ul>
+            <!-- <button type="button" onclick="toggleBtn()" id="btn"><span></span></button> -->
+        </nav>
+
+        <!-- <div class="lamp-container">
+            <img src="./images/lamp.png" class="lamp">
+            <img src="./images/light.png" class="light" id="light">
+        </div> -->
+
+        <div class="text-container">
+            <h1>Open Source. Just like Bitcoin.</h1>
+            <p>Dedicated to build the Linux Foundation of Bitcoin.</p>
+            <a href="#scroll-container">Packages</a> <a href="https://openbtc.org">Web App</a>
+            <!-- <div class="control">
+                <p>Open Source</p>
+                <div class="line"><span></span></div>
+                <p>Self Custody</p>
+            </div> -->
+        </div>
+
+        <div class="scoll-container" id="scroll-container">
+            <h2>pip install verifytx</h2>
+            <div class="scroll">
+                from openpyxl.styles import colors, PatternFill, Font, Color<br>
+                from requests.adapters import HTTPAdapter, Retry<br>
+                from openpyxl import load_workbook<br>
+                import requests<br>
+                import shutil<br>
+                import os<br>
+                <br>
+                def run():<br>
+                INPUT_PATH = 'input/'<br>
+                OUTPUT_PATH = 'output/'<br>
+                <br>
+                ASSET_TX_URL = {<br>
+                'ADA':['https://explorer.cardano.org/en/transaction?id='],<br>
+                'ALGO':['https://algoexplorer.io/tx/'],<br>
+                'ATOM':['https://atomscan.com/transactions/'],<br>
+                'BCH':['https://www.blockchain.com/bch/tx/'],<br>
+                'BSV':['https://bsv.tokenview.com/en/tx/'],<br>
+                'BTT':['https://bttcscan.com/tx/'],<br>
+                'DASH':['https://explorer.dash.org/insight/tx/'],<br>
+                'DOGE':['https://dogechain.info/tx/'],<br>
+                'DOT':['https://polkascan.io/polkadot/transaction/'],<br>
+                'EOS':['https://eosflare.io/tx/'],<br>
+                'GAS':['https://neoscan.io/transaction/'],<br>
+                'LTC':['https://litecoinblockexplorer.net/tx/'],<br>
+                'NANO':['https://nanolooker.com/block/'],<br>
+                'NEO':['https://neoscan.io/transaction/'],<br>
+                'SOL':['https://explorer.solana.com/tx/'],<br>
+                'TRX':['https://tronscan.org/#/transaction/'],<br>
+                'VET':['https://explore.vechain.org/transactions/'],<br>
+                'XLM':['https://stellarchain.io/tx/'],<br>
+                'XRP':['https://xrpscan.com/tx/'],<br>
+                'ZEC':['https://zcash.tokenview.com/en/tx/'],<br>
+                'BTC':['https://www.blockchain.com/btc/tx/']<br>
+                }<br>
+                <br>
+                SCAN_TX_URL = ['https://etherscan.io/tx/', 'https://polygonscan.com/tx/', 'https://bscscan.com/tx/',<br>
+                'https://snowtrace.io/tx/', 'https://ftmscan.com/tx/']<br>
+                <br>
+                def verify_tx_url(url):<br>
+                HEADERS = {<br>
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169<br>
+                Safari/537.36" ,<br>
+                'referer':'https://www.google.com/'<br>
+                }<br>
+                response = requests.Session()<br>
+                retries = Retry(total=15, backoff_factor=.1)<br>
+                response.mount('https://', HTTPAdapter(max_retries=retries))<br>
+                result = response.get(url, headers=HEADERS, timeout=2)<br>
+                if result.status_code != 200 or 'unable to locate this TxnHash' in result.text:<br>
+                return False<br>
+                <br>
+                return True<br>
+                <br>
+                _, _, files = next(os.walk(INPUT_PATH))<br>
+                <br>
+                for file in files:<br>
+                shutil.copy(f'{INPUT_PATH}{file}', OUTPUT_PATH)<br>
+                work_book = load_workbook(f'{OUTPUT_PATH}{file}', data_only=True)<br>
+                <br>
+                for worksheet_idx in range(len(work_book.worksheets)):<br>
+                tx_id_idx = None<br>
+                tx_url_idx = None<br>
+                asset_idx = None<br>
+                work_book.active = worksheet_idx<br>
+                work_sheet = work_book.active<br>
+                print(f'Working with {file} - {work_sheet.title}')<br>
+                <br>
+                def invalidate(row, col):<br>
+                work_sheet[row][col].value = 'Null'<br>
+                work_sheet[row][col].fill = PatternFill(start_color='F2D3D7', end_color='F2D3D7', fill_type = 'solid')<br>
+                work_sheet[row][col].font = Font(color='9C0039')<br>
+                
+                def validate(row, col, value):<br>
+                work_sheet[row][col].value = value<br>
+                work_sheet[row][col].fill = PatternFill(start_color='C3ECCB', end_color='C3ECCB', fill_type = 'solid')<br>
+                work_sheet[row][col].font = Font(color='006100')<br>
+                <br>
+                for column_idx, column_name in enumerate(work_sheet[1]):<br>
+                if column_name.value in ('Transaction Details', 'Transaction ID', 'Transaction Detail'):<br>
+                tx_id_idx = column_idx<br>
+                elif column_name.value == 'Blockchain URL':<br>
+                tx_url_idx = column_idx<br>
+                elif column_name.value in ('Asset', 'Currency'):<br>
+                asset_idx = column_idx<br>
+                
+                row_count = work_sheet.max_row<br>
+                
+                for row_idx in range(2, row_count + 1):<br>
+                print(f'Working with row #{row_idx}/{row_count}')<br>
+                if tx_id_idx is not None and tx_url_idx is not None:<br>
+                tx_id = work_sheet[row_idx][tx_id_idx].value<br>
+                <br>
+                if not tx_id:<br>
+                invalidate(row_idx, tx_url_idx)<br>
+                continue<br>
+                <br>
+                prefixes = []<br>
+                if asset_idx is not None:<br>
+                asset = work_sheet[row_idx][asset_idx].value<br>
+                if asset is None:<br>
+                prefixes = SCAN_TX_URL<br>
+                else:<br>
+                prefixes = ASSET_TX_URL.get(asset.upper(), SCAN_TX_URL)<br>
+                <br>
+                for prefix in prefixes:<br>
+                tx_url = f'{prefix}{tx_id}'<br>
+                if prefix in SCAN_TX_URL and not tx_id.startswith('0x'):<br>
+                tx_url = f'{prefix}0x{tx_id}'<br>
+                <br>
+                try:<br>
+                if verify_tx_url(tx_url):<br>
+                validate(row_idx, tx_url_idx, f'=HYPERLINK("{tx_url}", "Verified")')<br>
+                break<br>
+                else:<br>
+                invalidate(row_idx, tx_url_idx)<br>
+                except Exception as e:<br>
+                invalidate(row_idx, tx_url_idx)<br>
+                <br>
+                print('Verification Complete.')<br>
+                work_book.save(f'{OUTPUT_PATH}{file}')<br>
+                <br>    
+            </div>
+        </div>
+
+        <!-- <div class="scoll-container">
+            <h2>pip install debitcr</h2>
+            <div class="scroll">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when a
+            n unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            It has survived not only five centuries, but also the leap into electronic typesetting, 
+            remaining essentially unchanged. It was popularised in the 1960s with the release of 
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing 
+            software like Aldus PageMaker including versions of Lorem Ipsum. It is a long 
+            established fact that a reader will be distracted by the readable content of a page
+            when looking at its layout. The point of using Lorem Ipsum is that it has a 
+            more-or-less normal distribution of letters, as opposed to using 'Content here, 
+            content here', making it look like readable English. Many desktop publishing packages
+            and web page editors now use Lorem Ipsum as their default model text, and a search 
+            for 'lorem ipsum' will uncover many web sites still in their infancy.
+            </div>
+        </div> -->
+
+    </div>
+
+
+<!-- <script>
+    var btn = document.getElementById("btn");
+    var light = document.getElementById("light");
+
+    function toggleBtn() {
+        btn.classList.toggle("active");
+        light.classList.toggle("on");
+    }
+</script> -->
+
+</body>
+</html>
